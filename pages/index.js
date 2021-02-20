@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 import Cards from '../src/components/Cards'
+import db from '../db.json'
 
 const Title = styled.h1`
   font-size: 50px;
@@ -22,8 +23,10 @@ try {
     .then((respostaDoServer) => {
       if (respostaDoServer.ok) {
         return respostaDoServer.json();
+      } else {
+      console.log('Falha ao pegar os dados da api, retornando dados mockados');
+      return db
       }
-      throw new Error('Falha ao pegar os dados');
     })
     .then((respostaConvertidaEmObjeto) => respostaConvertidaEmObjeto)
 
