@@ -5,13 +5,15 @@ import db from '../db.json'
 
 const Title = styled.h1`
   font-size: 50px;
+  width: fit-content;
+  margin: 0 auto;
   color: ${({ theme }) => theme.colors.primary};
 `
 
 export default function Home({ pokemons }) {
   return (
    <>
-    <Title>Pokedex</Title>
+    <Title>Pokédex</Title>
     <Cards {...pokemons}/>
    </>
   )
