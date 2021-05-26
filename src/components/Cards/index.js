@@ -1,11 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
+import Link from 'next/link'
 
 export default function Cards({ pokemon }) {
+  // const router = useRouter();
+  // router.push(`/quiz?name=${name}`);
   return (
     <Wrapper>
       {pokemon.map((pokemon, index) => (
-        <Card key={index} bg={backgrounds[pokemon.type[0]]}>
+        <Link key={index} href={`/detail/?id=${pokemon.num}`} as={`/detail/${pokemon.num}`}>
+        <Card bg={backgrounds[pokemon.type[0]]}>
           <div>
             <Name>{pokemon.name}</Name>
             {pokemon.type.map((type, i) =>
@@ -13,10 +17,11 @@ export default function Cards({ pokemon }) {
             )}
             </div>
             <div>
-             <Id>{pokemon.num}</Id>
+             <Id color={colors[pokemon.type[0]]}>{pokemon.num}</Id>
             <img src={pokemon.img} />
             </div>
         </Card>
+        </Link>
       ))}
   </Wrapper>
   );
@@ -31,9 +36,9 @@ const backgrounds = {
 
 const colors = {
   Grass: '#7ED7C1',
-  Fire: '#E4826A',
-  Water: 'blue',
-  Bug: 'green'
+  Fire: '#F9979C',
+  Water: '#91C8F8',
+  Bug: '#A0CA65'
 }
 
 const Wrapper = styled.div`
@@ -60,6 +65,7 @@ const Card = styled.div`
  display: flex;
  justify-content: space-between;
  background: ${({ bg }) => bg};
+ cursor: pointer;
  img {
    width: 100px;
  }
@@ -69,7 +75,7 @@ const Card = styled.div`
 `;
 const Id = styled.div`
   font-size: 30px;
-  color: #7ED7C1;
+  color: ${({ color }) => color};
   font-weight: 700;
   text-align: right;
 `;
